@@ -1,9 +1,12 @@
 package org.example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Map;
 
 public class Differ {
     public static void generate(String _filepath1, String _filepath2) throws IOException {
@@ -18,6 +21,11 @@ public class Differ {
 
         System.out.println(file1);
         System.out.println(file2);
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map<String, Object> map = mapper.readValue(file1, Map.class);
+
+        System.out.println(map);
     }
 
     private static Path normalizeFilePath(String filepath) {
