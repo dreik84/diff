@@ -41,6 +41,6 @@ public class Differ {
 
     private static Map<String, Object> parseStringToMap(String file) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(file, new TypeReference<Map<String, Object>>() {});
+        return mapper.readValue(file, new TypeReference<>() {});
     }
 }
