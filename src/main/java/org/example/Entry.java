@@ -1,5 +1,10 @@
 package org.example;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public class Entry implements Comparable<Entry>{
 
     private final String key;
