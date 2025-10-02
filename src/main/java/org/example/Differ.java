@@ -8,10 +8,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Map;
 
 public class Differ {
-    public static void generate(String _filepath1, String _filepath2) throws IOException {
+    public static String generate(String _filepath1, String _filepath2) throws IOException {
         Path filepath1 = normalizeFilePath(_filepath1);
         Path filepath2 = normalizeFilePath(_filepath2);
 
@@ -29,6 +30,8 @@ public class Differ {
 
         System.out.println(map1);
         System.out.println(map2);
+
+        return diffToString(Comparator.compareMaps(map1, map2));
     }
 
     private static Path normalizeFilePath(String filepath) {
@@ -42,5 +45,26 @@ public class Differ {
     private static Map<String, Object> parseStringToMap(String file) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(file, new TypeReference<>() {});
+    }
+
+    private static String diffToString(List<Entry> entries) {
+        StringBuilder sb = new StringBuilder("{\n");
+
+        for (Entry entry : entries) {
+
+            switch (entry.getStatus()) {
+                case SAVED ->
+                        sb.append("    ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                case ADDED ->
+                        sb.append("  + ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                case DELETED ->
+                        sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
+                case UPDATED ->
+                        sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n")
+                        .append("  + ").append(entry.getKey()).append(": ").append(entry.getNewValue()).append("\n");
+            }
+        }
+
+        return sb.append("}").toString();
     }
 }
