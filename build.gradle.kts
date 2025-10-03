@@ -1,5 +1,6 @@
 plugins {
     application
+    checkstyle
     id("io.freefair.lombok") version "9.0.0"
 }
 
