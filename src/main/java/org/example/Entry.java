@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class Entry implements Comparable<Entry>{
+public class Entry implements Comparable<Entry> {
 
     private final String key;
     private final Object value;

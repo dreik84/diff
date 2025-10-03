@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Differ {
-    public static String generate(String _filepath1, String _filepath2) throws IOException {
-        Path filepath1 = normalizeFilePath(_filepath1);
-        Path filepath2 = normalizeFilePath(_filepath2);
+    public static String generate(String pathToFile1, String pathToFile2) throws IOException {
+        Path filepath1 = normalizeFilePath(pathToFile1);
+        Path filepath2 = normalizeFilePath(pathToFile2);
 
         System.out.println(filepath1);
         System.out.println(filepath2);
@@ -44,7 +44,7 @@ public class Differ {
 
     private static Map<String, Object> parseStringToMap(String file) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(file, new TypeReference<>() {});
+        return mapper.readValue(file, new TypeReference<>() { });
     }
 
     private static String diffToString(List<Entry> entries) {
@@ -62,6 +62,7 @@ public class Differ {
                 case UPDATED ->
                         sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n")
                         .append("  + ").append(entry.getKey()).append(": ").append(entry.getNewValue()).append("\n");
+                default -> throw new IllegalStateException("Invalid status of Entry");
             }
         }
 
