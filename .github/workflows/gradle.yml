@@ -1,16 +1,33 @@
-name: Java CI with Gradle
-# on – определяет события, которые запускают воркфлоу
-on: push
+name: Java CI
+
+on:
+  - push
+  - pull_request
+
 jobs:
-  # build – произвольно выбранное имя задания
-  # их может быть больше одного
   build:
-    # операционная система для работы воркфлоу
     runs-on: ubuntu-latest
-    steps: # список шагов, которые надо выполнить
-      # экшен — выполняет какую-то задачу
-      # checkout — клонирует репозиторий
-      - uses: actions/checkout@v4
-      # run – произвольная bash-команда
-      # ls -la выведет содержимое текущего репозитория
-      - run: ls -la
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Set up JDK
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup
+        run: make setup
+
+      - name: Build project
+        run: make build
+
+      - name: Checkstyle Main
+        run: make checkstyleMain
+
+      - name: Checkstyle Test
+        run: make checkstyleTest
+
+      - name: Tests
+        run: make test
