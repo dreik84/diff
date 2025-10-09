@@ -2,6 +2,14 @@ plugins {
     application
     checkstyle
     id("io.freefair.lombok") version "9.0.0"
+    id("org.sonarqube") version "6.3.1.5724"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "dreik84_diff")
+        property("sonar.organization", "dreik84")
+    }
 }
 
 group = "org.example"
