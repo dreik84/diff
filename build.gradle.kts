@@ -1,6 +1,7 @@
 plugins {
     application
     checkstyle
+    jacoco
     id("io.freefair.lombok") version "9.0.0"
     id("org.sonarqube") version "6.3.1.5724"
 }
@@ -13,6 +14,12 @@ sonar {
         property("sonar.projectKey", "dreik84_diff")
         property("sonar.organization", "dreik84")
         property("sonar.host.url", "https://sonarcloud.io")
+    }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
     }
 }
 
