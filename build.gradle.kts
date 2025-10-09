@@ -5,15 +5,16 @@ plugins {
     id("org.sonarqube") version "6.3.1.5724"
 }
 
+group = "org.example"
+version = "1.0-SNAPSHOT"
+
 sonar {
     properties {
         property("sonar.projectKey", "dreik84_diff")
         property("sonar.organization", "dreik84")
+        property("sonar.host.url", "https://sonarcloud.io")
     }
 }
-
-group = "org.example"
-version = "1.0-SNAPSHOT"
 
 application { mainClass.set("org.example.App") }
 
