@@ -19,6 +19,9 @@ checkstyleMain:
 checkstyleTest:
 	./gradlew checkstyleTest
 
+report:
+	./gradlew jacocoTestReport
+
 sonar:
 	./gradlew build sonar --info
 
