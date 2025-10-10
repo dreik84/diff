@@ -19,4 +19,7 @@ checkstyleMain:
 checkstyleTest:
 	./gradlew checkstyleTest
 
+sonar:
+	./gradlew build sonar --info
+
 .PHONY: build
