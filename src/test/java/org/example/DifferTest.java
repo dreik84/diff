@@ -1,6 +1,5 @@
 package org.example;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -11,10 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
 
-    String filepath1;
-    String filepath2;
-    String expected;
-
     String getFixturePath(String filename) {
         return Paths.get("src", "test", "resources", filename)
                 .toAbsolutePath().normalize().toString();
@@ -24,15 +19,23 @@ class DifferTest {
         return Files.readString(Paths.get(filepath));
     }
 
-    @BeforeEach
-    void initFilePath() throws IOException {
-        filepath1 = getFixturePath("file1.json");
-        filepath2 = getFixturePath("file2.json");
-        expected = getFixture(getFixturePath("result.txt"));
+    @Test
+    void testJson() throws IOException {
+        String filepath1 = getFixturePath("file1.json");
+        String filepath2 = getFixturePath("file2.json");
+
+        String expected = getFixture(getFixturePath("result.txt"));
+        String actual = Differ.generate(filepath1, filepath2);
+
+        assertEquals(expected, actual);
     }
 
     @Test
-    void generate() throws IOException {
+    void testYaml() throws IOException {
+        String filepath1 = getFixturePath("file1.yml");
+        String filepath2 = getFixturePath("file2.yml");
+
+        String expected = getFixture(getFixturePath("result.txt"));
         String actual = Differ.generate(filepath1, filepath2);
 
         assertEquals(expected, actual);
