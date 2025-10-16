@@ -29,7 +29,7 @@ public class App implements Callable<Integer> {
         System.out.println("FilePath 2: " + filepath2);
         System.out.println("Format: " + format);
 
-        String diff = Differ.generate(filepath1, filepath2);
+        String diff = Differ.generate(filepath1, filepath2, format);
         System.out.println(diff);
         return 0;
     }
