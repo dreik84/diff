@@ -1,10 +1,11 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Collections;
 
 public class Comparator {
@@ -19,7 +20,7 @@ public class Comparator {
                 result.add(new Entry(key, map2.get(key), EntryStatus.ADDED));
             } else if (!map2.containsKey(key)) {
                 result.add(new Entry(key, map1.get(key), EntryStatus.DELETED));
-            } else if (!map1.get(key).equals(map2.get(key))) {
+            } else if (!Objects.equals(map1.get(key), map2.get(key))) {
                 result.add(new Entry(key, map1.get(key), map2.get(key), EntryStatus.UPDATED));
             } else {
                 result.add(new Entry(key, map1.get(key), EntryStatus.SAVED));
