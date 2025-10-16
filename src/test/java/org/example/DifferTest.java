@@ -10,8 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
 
+    private static final String FORMAT = "stylish";
+
     String getFixturePath(String filename) {
-        return Paths.get("src", "test", "resources", filename)
+        return Paths.get("src", "test", "resources", "fixtures", filename)
                 .toAbsolutePath().normalize().toString();
     }
 
@@ -25,7 +27,7 @@ class DifferTest {
         String filepath2 = getFixturePath("file2.json");
 
         String expected = getFixture(getFixturePath("result.txt"));
-        String actual = Differ.generate(filepath1, filepath2);
+        String actual = Differ.generate(filepath1, filepath2, FORMAT);
 
         assertEquals(expected, actual);
     }
@@ -36,7 +38,7 @@ class DifferTest {
         String filepath2 = getFixturePath("file2.yml");
 
         String expected = getFixture(getFixturePath("result.txt"));
-        String actual = Differ.generate(filepath1, filepath2);
+        String actual = Differ.generate(filepath1, filepath2, FORMAT);
 
         assertEquals(expected, actual);
     }
