@@ -1,12 +1,12 @@
-package org.example.formatter;
+package org.example.formatters;
 
 import org.example.Entry;
 
 import java.util.List;
 
-public class StylishFormatter {
+public class StylishFormatter implements Formatter {
 
-    public static String diffToString(List<Entry> entries) {
+    public String diffToString(List<Entry> entries) {
         StringBuilder sb = new StringBuilder("{\n");
 
         for (Entry entry : entries) {
@@ -16,7 +16,7 @@ public class StylishFormatter {
                         sb.append("    ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
                 case ADDED ->
                         sb.append("  + ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
-                case DELETED ->
+                case REMOVED ->
                         sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
                 case UPDATED ->
                         sb.append("  - ").append(entry.getKey()).append(": ").append(entry.getValue()).append("\n")
