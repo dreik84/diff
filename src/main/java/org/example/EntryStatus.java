@@ -1,5 +1,5 @@
 package org.example;
 
 public enum EntryStatus {
-    SAVED, UPDATED, DELETED, ADDED
+    SAVED, UPDATED, REMOVED, ADDED
 }
