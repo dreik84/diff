@@ -19,7 +19,7 @@ public class Comparator {
             if (!map1.containsKey(key)) {
                 result.add(new Entry(key, map2.get(key), EntryStatus.ADDED));
             } else if (!map2.containsKey(key)) {
-                result.add(new Entry(key, map1.get(key), EntryStatus.DELETED));
+                result.add(new Entry(key, map1.get(key), EntryStatus.REMOVED));
             } else if (!Objects.equals(map1.get(key), map2.get(key))) {
                 result.add(new Entry(key, map1.get(key), map2.get(key), EntryStatus.UPDATED));
             } else {
