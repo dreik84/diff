@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.formatter.StylishFormatter;
+import org.example.formatters.Formatter;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,8 @@ public class Differ {
         Map<String, Object> map2 = Parser.parseFile(pathToFile2);
 
         List<Entry> diffList = Comparator.compareMaps(map1, map2);
-        String result = StylishFormatter.diffToString(diffList);
+        Formatter formatter = FormatManager.getFormatter(format);
+        String result = formatter.diffToString(diffList);
 
         System.out.println(map1);
         System.out.println(map2);
