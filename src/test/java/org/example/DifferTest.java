@@ -64,4 +64,26 @@ class DifferTest {
 
         assertEquals(expected, actual);
     }
+
+    @Test
+    void testJsonToJson() throws IOException {
+        String filepath1 = getFixturePath("file1.json");
+        String filepath2 = getFixturePath("file2.json");
+
+        String expected = getFixture(getFixturePath("json.txt"));
+        String actual = Differ.generate(filepath1, filepath2, "json");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testYamlToJson() throws IOException {
+        String filepath1 = getFixturePath("file1.yml");
+        String filepath2 = getFixturePath("file2.yml");
+
+        String expected = getFixture(getFixturePath("json.txt"));
+        String actual = Differ.generate(filepath1, filepath2, "json");
+
+        assertEquals(expected, actual);
+    }
 }
