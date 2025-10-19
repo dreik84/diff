@@ -17,12 +17,11 @@ public class PlainFormatter implements Formatter {
                 case SAVED -> sb.append("");
                 case ADDED -> sb.append(String.format("Property '%s' was %s with value: %s\n",
                         entry.getKey(), entry.getStatus().toString().toLowerCase(), checkValue(entry.getValue())));
-                case REMOVED -> sb.append("Property ").append("'").append(entry.getKey()).append("'").append(" was ")
-                        .append(entry.getStatus().toString().toLowerCase()).append("\n");
-                case UPDATED -> sb.append("Property ").append("'").append(entry.getKey()).append("'").append(" was ")
-                        .append(entry.getStatus().toString().toLowerCase()).append(". ")
-                        .append("From ").append(checkValue(entry.getValue())).append(" to ")
-                        .append(checkValue(entry.getNewValue())).append("\n");
+                case REMOVED -> sb.append(String.format("Property '%s' was %s\n",
+                        entry.getKey(), entry.getStatus().toString().toLowerCase()));
+                case UPDATED -> sb.append(String.format("Property '%s' was %s. From %s to %s\n",
+                        entry.getKey(), entry.getStatus().toString().toLowerCase(),
+                        checkValue(entry.getValue()), checkValue(entry.getNewValue())));
                 default -> throw new IllegalStateException("Invalid status of Entry");
             }
         }
