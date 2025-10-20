@@ -1,6 +1,7 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,8 +10,6 @@ import java.nio.file.Paths;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DifferTest {
-
-    private static final String FORMAT = "stylish";
 
     String getFixturePath(String filename) {
         return Paths.get("src", "test", "resources", "fixtures", filename)
@@ -21,32 +20,23 @@ class DifferTest {
         return Files.readString(Paths.get(filepath));
     }
 
-    @Test
-    void testJsonToStylish() throws IOException {
-        String filepath1 = getFixturePath("file1.json");
-        String filepath2 = getFixturePath("file2.json");
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    void testJsonYamlToStylish(String extension) throws IOException {
+        String filepath1 = getFixturePath("file1." + extension);
+        String filepath2 = getFixturePath("file2." + extension);
 
         String expected = getFixture(getFixturePath("stylish.txt"));
-        String actual = Differ.generate(filepath1, filepath2, FORMAT);
+        String actual = Differ.generate(filepath1, filepath2, "stylish");
 
         assertEquals(expected, actual);
     }
 
-    @Test
-    void testYamlToStylish() throws IOException {
-        String filepath1 = getFixturePath("file1.yml");
-        String filepath2 = getFixturePath("file2.yml");
-
-        String expected = getFixture(getFixturePath("stylish.txt"));
-        String actual = Differ.generate(filepath1, filepath2, FORMAT);
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void testJsonToPlain() throws IOException {
-        String filepath1 = getFixturePath("file1.json");
-        String filepath2 = getFixturePath("file2.json");
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    void testJsonYamlToPlain(String extension) throws IOException {
+        String filepath1 = getFixturePath("file1." + extension);
+        String filepath2 = getFixturePath("file2." + extension);
 
         String expected = getFixture(getFixturePath("plain.txt"));
         String actual = Differ.generate(filepath1, filepath2, "plain");
@@ -54,32 +44,11 @@ class DifferTest {
         assertEquals(expected, actual);
     }
 
-    @Test
-    void testYamlToPlain() throws IOException {
-        String filepath1 = getFixturePath("file1.yml");
-        String filepath2 = getFixturePath("file2.yml");
-
-        String expected = getFixture(getFixturePath("plain.txt"));
-        String actual = Differ.generate(filepath1, filepath2, "plain");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void testJsonToJson() throws IOException {
-        String filepath1 = getFixturePath("file1.json");
-        String filepath2 = getFixturePath("file2.json");
-
-        String expected = getFixture(getFixturePath("json.txt"));
-        String actual = Differ.generate(filepath1, filepath2, "json");
-
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void testYamlToJson() throws IOException {
-        String filepath1 = getFixturePath("file1.yml");
-        String filepath2 = getFixturePath("file2.yml");
+    @ParameterizedTest
+    @ValueSource(strings = {"json", "yml"})
+    void testJsonYamlToJson(String extension) throws IOException {
+        String filepath1 = getFixturePath("file1." + extension);
+        String filepath2 = getFixturePath("file2." + extension);
 
         String expected = getFixture(getFixturePath("json.txt"));
         String actual = Differ.generate(filepath1, filepath2, "json");
