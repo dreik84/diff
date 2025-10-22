@@ -15,9 +15,6 @@ public class Differ {
         Formatter formatter = FormatManager.getFormatter(format);
         String result = formatter.diffToString(diffList);
 
-        System.out.println(map1);
-        System.out.println(map2);
-
         return result;
     }
 }

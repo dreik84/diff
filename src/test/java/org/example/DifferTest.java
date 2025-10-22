@@ -22,12 +22,12 @@ class DifferTest {
 
     @ParameterizedTest
     @CsvSource({
-            "json, stylish",
-            "yml, stylish",
-            "json, plain",
-            "yml, plain",
-            "json, json",
-            "yml, json"
+        "json, stylish",
+        "yml, stylish",
+        "json, plain",
+        "yml, plain",
+        "json, json",
+        "yml, json"
 
     })
     void testDiff(String extension, String format) throws IOException {
